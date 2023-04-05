@@ -216,12 +216,13 @@ let backgroundImageHeight = 0;
 function resizeCanvas() {
     // Calculate the canvas size based on the aspect ratio of the background image
     const aspectRatio = backgroundImage.width / backgroundImage.height;
-    let canvasHeight = Math.min(window.innerHeight, backgroundImage.height);
-    let canvasWidth = Math.min(canvasHeight * aspectRatio, window.innerWidth);
+    let canvasWidth = Math.min(window.innerWidth, backgroundImage.width);
+    let canvasHeight = canvasWidth / aspectRatio;
 
-    // Constrain the canvas width to the window width
-    if (canvasWidth > window.innerWidth) {
-        canvasWidth = window.innerWidth;
+    // If the canvas height is larger than the window height, constrain the canvas height
+    if (canvasHeight > window.innerHeight) {
+        canvasHeight = window.innerHeight;
+        canvasWidth = canvasHeight * aspectRatio;
     }
 
     // Set the canvas size
@@ -232,10 +233,9 @@ function resizeCanvas() {
     backgroundImageWidth = canvasWidth;
     backgroundImageHeight = canvasHeight;
 
-
     // Calculate the position to center the canvas in the window with 8px of space on the left
     const canvasOffsetX = (window.innerWidth - canvasWidth) / 2 - 8;
-    const canvasOffsetY = (window.innerHeight - canvasHeight) / 2 - 8;
+    const canvasOffsetY = (window.innerHeight - canvasHeight) / 2 + 8;
 
     // Set the canvas position
     canvas.style.left = canvasOffsetX + "px";
@@ -260,6 +260,7 @@ function resizeCanvas() {
         ctx.drawImage(playerImage, playerX, playerY, playerWidth, playerHeight);
     };
 }
+
 
 function drawBackgroundImage(ctx, backgroundImage, canvasWidth, canvasHeight) {
     const imageAspectRatio = backgroundImage.width / backgroundImage.height;
