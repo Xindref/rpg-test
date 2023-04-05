@@ -1,0 +1,15 @@
+body {
+    /* background-image: url(/images/battleMap1.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat; */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(4, 6, 32);
+    overflow: hidden;
+}
+
+#canvas {
+    position: relative;
+    image-rendering: crisp-edges;
+}
